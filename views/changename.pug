@@ -1,0 +1,34 @@
+extends layout
+
+block navbar
+  nav.navbar.navbar-default
+    .container-fluid
+      .navbar-header
+        button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand(href='#') [School Name] Schedule Compare
+      #bs-example-navbar-collapse-1.collapse.navbar-collapse
+        ul.nav.navbar-nav.navbar-right
+          li
+            a(href='/logout') Log Out
+block content
+  .jumbotron
+    .container
+      each alert in messages
+        .alert.alert-danger(role="alert")= alert
+      h1 Registration
+  .container
+    // Header
+    //.col-md-3
+    h1 YOUR NAME CANNOT BE CHANGED LATER
+    ul
+        li
+            h3 We could not get your name from your Google Account, so you get ONE CHANCE to enter your name here.
+        li
+            h3 This is important because it will allow your classmates to identify you in your classes
+    form.form-horizontal(action="", method="POST")
+      input.form-control.code-field(name="name", type="text", placeholder="Enter your full name")
+      button.btn.btn-default.submit-button(type="submit") Submit

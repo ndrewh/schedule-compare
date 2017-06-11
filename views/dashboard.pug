@@ -1,0 +1,54 @@
+extends layout
+
+block navbar
+  nav.navbar.navbar-default
+    .container-fluid
+      .navbar-header
+        button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand(href='#') [School Name] Schedule Compare
+      #bs-example-navbar-collapse-1.collapse.navbar-collapse
+        ul.nav.navbar-nav.navbar-right
+          li
+            a(href='/logout') Log Out
+block content
+  .jumbotron
+    .container
+      each alert in messages
+        .alert.alert-danger(role="alert")= alert
+      h1 Hello, #{user.name}.
+      h3 Lets get started by entering in your schedule
+  .container
+    // Header
+    //.col-md-3
+    img(width=300, src="/help-img.jpg")
+    ul
+      li
+        h4 Enter first semester courses ONLY.
+      li
+        h4 As you enter in your class names, type "NOT LISTED" if your class does not appear as you type.
+      li
+        h2
+          b You must provide both the class code and section number from your schedule
+      li
+        h4 Enter FIRST SEMESTER ONLY
+    form.form-horizontal(action="", method="POST")
+      each pNum in [1, 2, 3, 4, 5, 6, 7]
+        - var thisClass = user.schedule.find(function(c) { return c.period === pNum })
+        - var code = thisClass ? thisClass.classCode : ""
+        - var section = thisClass ? thisClass.section : ""
+        - var name = user.myNames ? user.myNames[pNum-1] : ""
+        .row.period-row
+          .col-md-2.period-label
+            p Period #{pNum}
+          .form-group
+            .col-md-2
+              input.form-control.code-field(name="class"+pNum, type="text", placeholder="Class Code", value=code)
+            .col-md-2
+              input.form-control.section-field(name="section"+pNum type="text", placeholder="Class Section", value=section)
+            .col-md-3
+              input.form-control.typeahead.class-field(name="name"+pNum type="text", placeholder="Class Name", value=name)
+      button.btn.btn-default.submit-button(type="submit") Submit

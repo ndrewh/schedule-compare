@@ -1,0 +1,12 @@
+{
+    "domain": "yourschool.k12.oh.us",
+    "redis": "localhost",
+    "redisSecret": "<some secret>",
+    "rethinkdbHost": "localhost",
+    "rethinkdbTable": "schedule_compare",
+    "google": {
+        "clientID": "<your ID>",
+        "clientSecret": "<your secret>",
+        "callbackURL": "https://<your application URL>/auth/google/callback"
+    }
+}
